@@ -1,0 +1,63 @@
+public abstract class Animal{
+    public String name;
+    public String food;
+    public String getName(){
+        return name;
+    }
+    public  void setName(String name){
+        this.name=name;
+    }
+    public String getFood(){
+        return food;
+    }
+    public void setFood(String food){
+        this.food=food;
+    }
+    public  static void Eat(){
+        System.out.println("我在吃饭");
+    }
+    public static void Sleep(){
+        System.out.println("我在睡觉");
+    }
+    public Animal(String name,String food){
+        this.name=name;
+        this.food=food;
+    }
+}
+
+
+
+public class Mouse extends Animal{
+    public Mouse(String name,String food){
+        super(name,food);
+    }
+    public static void dig(){
+        System.out.println("我在打洞");
+    }
+}
+
+
+
+public class Panda extends Animal{
+    public Panda(String name,String food){
+        super(name,food);
+    }
+}
+
+
+public class Animal Test{
+    public static void main(String args[]){
+        Panda panda=new Panda("熊猫","竹子");
+        System.out.println("名字:"+panda.getName()+"\t");
+        System.out.println("食物:"+panda.getFood()+"\t");
+        Panda.Eat();
+        Panda.Sleep();
+        System.out.println();
+        Mouse mouse=new Mouse("老鼠","大米");
+        System.out.println("名字:"+mouse.getName()+"\t");
+        System.out.println("食物:"+mouse.getFood()+"\t");
+        Mouse.Eat();
+        Mouse.Sleep();
+        Mouse.dig();
+    }
+}
