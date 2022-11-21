@@ -1,0 +1,62 @@
+import java.util.ArrayList;
+import java.util.List;
+ 
+public class Game {
+	Player h;
+	List<Enemy> enemys = new ArrayList<Enemy>();
+ 
+	public Game(String name, String weapon) {
+		h = new Player(name, weapon);
+		enemys.add(new Monster(1));
+		enemys.add(new Monster(2));
+		enemys.add(new Monster(3));
+ 
+		enemys.add(new Vampire(1));
+		enemys.add(new Vampire(2));
+		enemys.add(new Vampire(4));
+		enemys.add(new Vampire(1));
+ 
+	}
+ 
+	public void start() {
+		// 死循环 实现游戏自动打
+		while (true) {
+			// 生成一个随机数 0-5
+			int ran = GameUtil.getNumber(0, enemys.size());
+			h.fight(enemys.get(ran));
+			// 玩家死亡 游戏结束
+			if (!h.isLive()) {
+				System.out.println("恢复一下");
+				h.setLife(100);
+				h.setLive(true);
+				// end();
+				// break;
+ 
+			}
+			// 如果当前对手是死亡
+			if (!enemys.get(ran).isLive()) {
+				// 将此对手移除集合
+				enemys.remove(enemys.get(ran));
+			}
+			// 判断集合大小 如果小于等于0 证明所有的对手都死亡了
+			if (enemys.size() <= 0) {
+				end();
+				break;
+			}
+ 
+			try {
+				System.out.println("-----------正在寻找对手--------------");
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+ 
+		}
+ 
+	}
+ 
+	public void end() {
+		System.out.println("Game Over!!!");
+	}
+ 
+}
